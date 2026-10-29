@@ -2,7 +2,7 @@
 param([Parameter(Mandatory=$true)][string]$JobFile)
 $ErrorActionPreference='Stop'
 try {
-    $job=Get-Content -LiteralPath $JobFile -Raw | ConvertFrom-Json
+    $job=Get-Content -LiteralPath $JobFile -Raw -Encoding UTF8 | ConvertFrom-Json
     $shell=New-Object -ComObject Shell.Application
     $device=@($shell.Namespace(17).Items() | Where-Object {$_.Name -match 'iPhone'})
     if ($device.Count -ne 1) { throw 'iPhone is unavailable.' }

@@ -14,7 +14,7 @@ param(
 $ErrorActionPreference = 'Stop'
 try {
     if ($Config) {
-        $settings = Get-Content -LiteralPath $Config -Raw | ConvertFrom-Json
+        $settings = Get-Content -LiteralPath $Config -Raw -Encoding UTF8 | ConvertFrom-Json
         foreach ($key in @('Start','End','Destination','TimeZone','TimeoutSeconds','Media')) {
             if (!$PSBoundParameters.ContainsKey($key) -and $null -ne $settings.$key) { Set-Variable -Name $key -Value $settings.$key }
         }
@@ -92,6 +92,7 @@ try {
             $complete = $false
             do {
                 Start-Sleep -Milliseconds 750
+                if ($process.HasExited -and $process.ExitCode -ne 0) { break }
                 if ((Test-Path -LiteralPath $target) -and (Get-Item -LiteralPath $target).Length -eq $entry.Bytes -and $process.HasExited) { $complete=$true; break }
             } while ([datetime]::UtcNow -lt $deadline)
             if (!$complete -or $process.ExitCode -ne 0) {
