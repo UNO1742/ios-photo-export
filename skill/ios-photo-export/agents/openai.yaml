@@ -1,0 +1,4 @@
+interface:
+  display_name: "iOS 照片导出"
+  short_description: "通过 USB 按时间段导出 iPhone 照片和视频到自定义目录"
+  default_prompt: "使用 $ios-photo-export 导出 iPhone 今天早上 8 点到现在的照片和视频。"

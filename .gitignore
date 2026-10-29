@@ -1,0 +1,14 @@
+exports/
+config.json
+*.log
+export-manifest-*.json
+*.HEIC
+*.heic
+*.jpg
+*.JPG
+*.png
+*.PNG
+*.mov
+*.MOV
+*.mp4
+*.MP4
